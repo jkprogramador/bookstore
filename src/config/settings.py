@@ -38,8 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Local
     'accounts',
     'pages',
+    
+    # Third-party
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -122,7 +128,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'static/' # Sets the URL we can use to reference static files
+
+# Defines the location of static files in local development. In this case, these will live within top-level static folder
+STATICFILES_DIRS = [str(BASE_DIR.joinpath('static')),]
+
+# Defines the location of static files for production. collectstatic command automatically compiles all static files into this folder
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+
+# Implicitly set for us, so this is optional. Tells Django how to look for static file directories
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder', # Looks within STATICFILES_DIRS for any static files
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder', # Looks for any directories named static within an app
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -134,3 +152,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 LOGIN_REDIRECT_URL = 'home'
 
 LOGOUT_REDIRECT_URL = 'home'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'

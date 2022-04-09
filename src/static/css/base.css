@@ -1,0 +1,11 @@
+.bookcover {
+    height: 300px;
+    width: auto;
+}
+
+@media screen and (min-width:1200px) {
+    html {
+        /* 20px */
+        font-size: 1.25rem;
+    }
+}

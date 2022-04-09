@@ -1,12 +1,15 @@
-{% extends '_base.html' %}
+{% extends '_base.html' %} {% comment 'extends must be first tag' %}{% endcomment %}
+
+{% load static %}
 
 {% block title %}Home{% endblock title %}
 
 {% block content %}
 <h1>Homepage</h1>
+<img class="bookcover" src="{% static 'images/dfp.jpg' %}" alt="Cover for the book Django for Professionals">
 
 {% if user.is_authenticated %}
-Hi {{ user.email }}!
+<p>Hi {{ user.email }}!</p>
 
 <p><a href="{% url 'logout' %}">Log out</a></p>
 {% else %}
