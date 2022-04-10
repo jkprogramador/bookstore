@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Local
     'accounts',
@@ -46,6 +47,8 @@ INSTALLED_APPS = [
     # Third-party
     'crispy_forms',
     'crispy_bootstrap5',
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
@@ -151,8 +154,34 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 LOGIN_REDIRECT_URL = 'home'
 
-LOGOUT_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT = 'home'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # Under the hood, Django uses this to authenticate a user
+    'allauth.account.auth_backends.AuthenticationBackend' # Add django-allauth specific authentication, which allows us to login via email
+)
+
+# By default, django-allauth sends emails upon successful user registration through SMTP server, but for now use console to see the emails
+# DO NOT FORGET TO RUN python manage.py migrate
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Default None asks user if they want their session to be remembered so they do not have to log in again (displays checkbox 'Remember Me' when logging in)
+# Set to False to not remember or True to always remember
+ACCOUNT_SESSION_REMEMBER = True
+
+# Disable password confirmation field when signing up
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+
+ACCOUNT_USERNAME_REQUIRED = False # Authentication via email, not username anymore
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
+ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_UNIQUE_EMAIL = True

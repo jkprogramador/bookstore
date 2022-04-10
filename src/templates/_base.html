@@ -30,18 +30,20 @@
                         </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            <a {% if request.resolver_match.url_name == 'account_logout' %}class="nav-link active"
+                                aria-current="page" {% else %}class="nav-link" {% endif %}
+                                href="{% url 'account_logout' %}">Logout</a>
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a {% if request.resolver_match.url_name == 'login' %}class="nav-link active"
+                            <a {% if request.resolver_match.url_name == 'account_login' %}class="nav-link active"
                                 aria-current="page" {% else %}class="nav-link" {% endif %}
-                                href="{% url 'login' %}">Login</a>
+                                href="{% url 'account_login' %}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a {% if request.resolver_match.url_name == 'signup' %}class="nav-link active"
+                            <a {% if request.resolver_match.url_name == 'account_signup' %}class="nav-link active"
                                 aria-current="page" {% else %}class="nav-link" {% endif %}
-                                href="{% url 'signup' %}">Sign Up</a>
+                                href="{% url 'account_signup' %}">Sign Up</a>
                         </li>
                         {% endif %}
                     </ul>
