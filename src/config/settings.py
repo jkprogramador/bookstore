@@ -8,6 +8,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
+
+Check out repository at https://github.com/wsvincent/djangoforprofessionals
 """
 
 from pathlib import Path
@@ -188,3 +190,5 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_UNIQUE_EMAIL = True
+
+DEFAULT_FROM_EMAIL = 'admin@djangobookstore.com' # Default email used when sending emails (e.g., when sending signup confirmation)

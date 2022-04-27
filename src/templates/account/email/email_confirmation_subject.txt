@@ -1,0 +1,9 @@
+{% load i18n %} {# Internationalization support #}
+
+{% autoescape off %} {# We trust the content of the text here #}
+
+{% blocktrans %}
+Confirm Your Sign Up
+{% endblocktrans %}
+
+{% endautoescape %}

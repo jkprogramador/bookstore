@@ -24,9 +24,8 @@ urlpatterns = [
     # accounts/login/ [name='login']
     # accounts/logout/[name='logout']
     # ...
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
 
     # Local apps
-    path('account/', include('allauth.urls')),
     path('', include('pages.urls')),
 ]
