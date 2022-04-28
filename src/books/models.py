@@ -4,10 +4,11 @@ from django.contrib.auth import get_user_model # use it to refer to CustomUser m
 import uuid
 
 class Book(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(max_length=200, null=False, blank=False)
-    author = models.CharField(max_length=200, null=False, blank=False)
-    price = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,)
+    title = models.CharField(max_length=200, null=False, blank=False,)
+    author = models.CharField(max_length=200, null=False, blank=False,)
+    price = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False,)
+    cover = models.ImageField(upload_to='covers/', blank=True,)
 
     def __str__(self) -> str:
         """

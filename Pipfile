@@ -9,6 +9,7 @@ psycopg2-binary = "==2.9.3"
 crispy-bootstrap5 = "*"
 django-allauth = "==0.50.0"
 environs = "==9.5.0"
+pillow = "==9.0"
 
 [dev-packages]
 

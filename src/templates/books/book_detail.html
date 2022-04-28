@@ -6,6 +6,9 @@
 
 <div class="book-detail">
     <h2><a href="">{{ book.title }}</a></h2>
+    {% if book.cover %}
+    <img src="{{ book.cover.url }}" alt="{{ book.title }}" width="300">
+    {% endif %}
 
     <p>Author: {{ book.author }}</p>
     <p>Price: {{ book.price }}</p>
