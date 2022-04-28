@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
-from .models import Book
+from django.contrib.auth import get_user_model
+from .models import Book, Review
 from .views import BookListView, BookDetailView
 
 class BookListViewTest(TestCase):
@@ -44,11 +45,22 @@ class BookListViewTest(TestCase):
 
 class BookDetailViewTest(TestCase):
     def setUp(self) -> None:
+        self.user = get_user_model().objects.create_user(
+            username = 'reviewuser',
+            email = 'reviewuser@email.com',
+            password = 'reviewuser123REVIEWUSER',
+        )
         self.book = Book.objects.create(
             title = 'Fishing for Dummies',
             author = 'Jane Doe',
             price = '16.75',
         )
+        self.review = Review.objects.create(
+            review = 'An excellent review.',
+            book = self.book,
+            author = self.user,
+        )
+
         url = reverse('book_detail', args=[str(self.book.pk)])
         self.res = self.client.get(url)
     
@@ -66,6 +78,8 @@ class BookDetailViewTest(TestCase):
         self.assertContains(self.res, self.book.title)
         self.assertContains(self.res, self.book.author)
         self.assertContains(self.res, self.book.price)
+        self.assertContains(self.res, self.review.review)
+        self.assertContains(self.res, self.review.author)
     
     def test_does_not_contain_incorrect_html(self) -> None:
         self.assertNotContains(self.res, 'I should not be here')
